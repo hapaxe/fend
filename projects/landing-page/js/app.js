@@ -46,7 +46,7 @@ sections.forEach((item, i) => {
 
 
 // Scroll to anchor ID using scrollTO event
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('li[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
 
