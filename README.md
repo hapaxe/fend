@@ -1,6 +1,6 @@
-# Front End Nanodegree Program
+# Front End landing Page submission
 
-Front End Nanodegree Content & Project Resources
+The code is in projects/landing-page.
 
 ## Table of Contents
 
