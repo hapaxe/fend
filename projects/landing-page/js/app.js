@@ -29,15 +29,26 @@
 */
 
 // build the nav
-// search all sections and add them to the navbar__list?
+// search all sections and add them to the navbar__list
 const sections = document.querySelectorAll('section');
 const navbar = document.getElementById("navbar__list");
 sections.forEach((item, i) => {
   const node = document.createElement("li");
-  node.href = item.id;
-  var textnode = document.createTextNode(item.dataset.nav);
-  node.appendChild(textnode);
+  // node.href = item.id;
+  // var textnode = document.createTextNode(item.dataset.nav);
+  // node.appendChild(textnode);
+  a = document.createElement('a');
+  a.href =  item.id;
+  a.innerHTML = item.dataset.nav;
+  node.appendChild(a);
   navbar.appendChild(node);
+  node.addEventListener('click', function (e) {
+      // e.preventDefault();
+
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
 });
 
 
@@ -46,15 +57,15 @@ sections.forEach((item, i) => {
 
 
 // Scroll to anchor ID using scrollTO event
-document.querySelectorAll('li[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+// document.querySelectorAll('li[href^="#"]').forEach(anchor => {
+//     anchor.addEventListener('click', function (e) {
+//         e.preventDefault();
+//
+//         document.querySelector(this.getAttribute('href')).scrollIntoView({
+//             behavior: 'smooth'
+//         });
+//     });
+// });
 
 /**
  * End Main Functions
