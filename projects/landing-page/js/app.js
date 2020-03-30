@@ -34,34 +34,29 @@ const sections = document.querySelectorAll('section');
 const navbar = document.getElementById("navbar__list");
 sections.forEach((item, i) => {
   const node = document.createElement("li");
+  a = createLink(item);
+  node.appendChild(a);
+  navbar.appendChild(node);
+
+});
+
+function createLink(item){
   a = document.createElement('a');
   a.href =  '#' + item.id;
   a.innerHTML = item.dataset.nav;
-  node.appendChild(a);
-  navbar.appendChild(node);
   a.addEventListener('click', function (e) {
       e.preventDefault();
       document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth'
       });
   });
-});
+  return a;
+}
 
 
 
 // Add class 'active' to section when near top of viewport
 
-
-// Scroll to anchor ID using scrollTO event
-// document.querySelectorAll('li[href^="#"]').forEach(anchor => {
-//     anchor.addEventListener('click', function (e) {
-//         e.preventDefault();
-//
-//         document.querySelector(this.getAttribute('href')).scrollIntoView({
-//             behavior: 'smooth'
-//         });
-//     });
-// });
 
 /**
  * End Main Functions
