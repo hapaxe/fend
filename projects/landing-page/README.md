@@ -1,13 +1,14 @@
 # Landing Page Project
 
-## Table of Contents
+## Goal
 
-* [Instructions](#instructions)
+Demonstrate how we can operate on DOM elements at run-time, based on user actions.
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Landing Page project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The project does not have any dependencies, it will run as is from virtually any browser.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Steps
 
-For specific, detailed instructions, look at the project instructions in the Udacity Classroom.
+- The page has a navbar dynamically updated based on how many sections the page has.
+- When scrolling, the correct paragraph is highlighted, as well as the corresponding link in the nav bar.
