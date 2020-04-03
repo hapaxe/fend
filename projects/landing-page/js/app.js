@@ -14,31 +14,6 @@
 */
 
 
-/**
- * End Global Variables
- * Start Helper Functions
- *
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- *
-*/
-
-// build the nav
-// search all sections and add them to the navbar__list
-const sections = document.querySelectorAll('section');
-const navbar = document.getElementById("navbar__list");
-sections.forEach((item, i) => {
-  const node = document.createElement("li");
-  a = createLink(item);
-  node.appendChild(a);
-  navbar.appendChild(node);
-
-});
 
 function createLink(item){
   a = document.createElement('a');
@@ -53,19 +28,32 @@ function createLink(item){
   return a;
 }
 
+function isElementInViewport (element) {
+    var rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0
+    );
+}
 
+function checkVisible(sections) {
+  return Array.from(sections).find(isElementInViewport);
 
-// Add class 'active' to section when near top of viewport
+}
 
+const sections = document.querySelectorAll('section');
+const navbar = document.getElementById("navbar__list");
 
-/**
- * End Main Functions
- * Begin Events
- *
-*/
+sections.forEach((item, i) => {
+  const node = document.createElement("li");
+  a = createLink(item);
+  node.appendChild(a);
+  navbar.appendChild(node);
+});
 
-// Build menu
+let currentSection = sections[0];
 
-// Scroll to section on link click
-
-// Set sections as active
+window.addEventListener('scroll', function(e) {
+    newSection = checkVisible(sections);
+    
+});
