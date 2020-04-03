@@ -58,19 +58,28 @@ sections.forEach((item, i) => {
 });
 
 let currentSection = sections[0];
+let isStillScrolling= false;
+
+runAfterScroll = function() {
+  newSection = checkVisible(sections);
+  currentSection.classList.remove("your-active-class");
+  newSection.classList.add("your-active-class");
+  currentSection = newSection;
+
+  Array.from(navbar.children).forEach((item) => {
+    if (item.children[0].innerHTML == currentSection.dataset.nav) {
+      item.classList.add("active");
+    }
+    else {
+      item.classList.remove("active");
+    }
+  });
+}
+
+var isScrolling;
 
 window.addEventListener('scroll', function(e) {
-    newSection = checkVisible(sections);
-    currentSection.classList.remove("your-active-class");
-    newSection.classList.add("your-active-class");
-    currentSection = newSection;
-    Array.from(navbar.children).forEach((item) => {
-      if (item.children[0].innerHTML == currentSection.dataset.nav) {
-        item.classList.add("active");
-      }
-      else {
-        item.classList.remove("active");
-      }
-    });
+    window.clearTimeout( isScrolling );
+    isScrolling = setTimeout(runAfterScroll, 66);
 
 });
