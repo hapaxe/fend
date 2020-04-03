@@ -13,8 +13,6 @@
  *
 */
 
-
-
 function createLink(item){
   a = document.createElement('a');
   a.href =  '#' + item.id;
@@ -76,6 +74,9 @@ runAfterScroll = function() {
   });
 }
 
+// in order to prevent the page to be repainted in the middle of a scroll,
+// we setup a timeout before executing the update.
+// we also need to clear the timeout function when scroll is running.
 var isScrolling;
 
 window.addEventListener('scroll', function(e) {
