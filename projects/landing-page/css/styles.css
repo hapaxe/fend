@@ -82,6 +82,10 @@ section {
     padding: 10px;
 }
 
+li.active {
+    background-color: #D64550;;
+}
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;

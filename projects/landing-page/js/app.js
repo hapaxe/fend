@@ -37,8 +37,14 @@ function isElementInViewport (element) {
 }
 
 function checkVisible(sections) {
-  return Array.from(sections).find(isElementInViewport);
-
+  const res = Array.from(sections).find(isElementInViewport);
+  if (res == null) {
+    // in case no section is completely in viewport, only the last one will be relevant.
+    return Array.from(sections)[sections.length - 1];
+  }
+  else {
+    return res;
+  }
 }
 
 const sections = document.querySelectorAll('section');
@@ -58,4 +64,13 @@ window.addEventListener('scroll', function(e) {
     currentSection.classList.remove("your-active-class");
     newSection.classList.add("your-active-class");
     currentSection = newSection;
+    Array.from(navbar.children).forEach((item) => {
+      if (item.children[0].innerHTML == currentSection.dataset.nav) {
+        item.classList.add("active");
+      }
+      else {
+        item.classList.remove("active");
+      }
+    });
+
 });
