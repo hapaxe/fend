@@ -55,5 +55,7 @@ let currentSection = sections[0];
 
 window.addEventListener('scroll', function(e) {
     newSection = checkVisible(sections);
-    
+    currentSection.classList.remove("your-active-class");
+    newSection.classList.add("your-active-class");
+    currentSection = newSection;
 });
