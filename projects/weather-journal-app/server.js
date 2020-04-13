@@ -3,21 +3,48 @@ projectData = {};
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
-// Start up an instance of app
 const app = express();
-
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-// Cors for cross origin allowance
 const cors = require('cors');
-
-// Initialize the main project folder
 app.use(express.static('website'));
-app.use(cors);
+app.use(cors());
 
+
+// const updateUI = async () => {
+//   const request = await fetch('/all');
+//   try{
+//     const allData = await request.json();
+//     document.getElementById('animalName').innerHTML = allData[0].animal;
+//     document.getElementById('animalFact').innerHTML = allData[0].facts;
+//     document.getElementById('animalFav').innerHTML = allData[0].fav;
+//
+//   }catch(error){
+//     console.log("error", error);
+//   }
+// }
+
+// function performAction(e){
+//   const zipCode =  document.getElementById('zip').value;
+//
+//   getWeather(zipCode)
+//   .then(function(data){
+//     console.log(data);
+//     postData('/addAnimal', {animal:data.animal, fact: data.fact, fav:favFact} );
+//   })
+//   .then(
+//     updateUI()
+//   )
+// }
 
 // Setup Server
+app.get('/', function(req, res) {
+  res.send(projectData);
+});
+
+
+
+
+app.listen(3000, function() {
+  console.log('Example app listening on port 3000!');
+});
