@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {};
+projectData = new Array();
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -38,11 +38,15 @@ app.use(cors());
 // }
 
 // Setup Server
-app.get('/', function(req, res) {
+app.get('/all', function(req, res) {
   res.send(projectData);
 });
 
-
+app.post('/post', function (req,res) {
+  projectData.push(req.body);
+  console.log('server data');
+  console.log(projectData);
+});
 
 
 app.listen(3000, function() {

@@ -12,11 +12,38 @@ const getWeather = async () => {
   const res = await fetch(weatherAPICall + zipCode + ',us'+'&appid=' + weatherAPIKey)
   try {
     const data = await res.json();
-    console.log(data);
     return data;
   }  catch(error) {
     console.log("error", error);
   }
 }
 
-document.getElementById('generate').addEventListener('click', getWeather);
+const postData = async ( data ) => {
+    url = 'http://localhost:3000/post'
+    const response = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://localhost:3000/',
+    },
+    body: JSON.stringify(data),
+  });
+
+    try {
+      const newData = await response.json();
+      console.log(newData);
+      return newData;
+    }catch(error) {
+    console.log("error", error);
+    }
+}
+
+function postFeelings(e) {
+  getWeather()
+  .then(function(data){
+    postData(data);
+  })
+}
+
+document.getElementById('generate').addEventListener('click', postFeelings);
