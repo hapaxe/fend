@@ -7,13 +7,35 @@ const updateUI = async () => {
   try{
 
     const allData = await request.json();
-    document.getElementById('date').innerHTML = allData[0].date;
-    document.getElementById('temp').innerHTML = allData[0].temp;
-    document.getElementById('content').innerHTML = allData[0].content;
+
+    allData.forEach((item, i) => {
+      addSection(i);
+      document.getElementById('date' + i).innerHTML = allData[i].date;
+      document.getElementById('temp' + i).innerHTML = allData[i].temp;
+      document.getElementById('content' + i).innerHTML = allData[i].feelings;
+    });
 
   } catch(error) {
     console.log("error", error);
   }
+}
+
+function addSection(number) {
+  let newHolder = document.createElement("div");
+  newHolder.setAttribute("id", "entryHolder" + number);
+  let newDate = document.createElement("div");
+  newDate.setAttribute("id", "date" + number);
+  let newTemp = document.createElement("div");
+  newTemp.setAttribute("id", "temp" + number);
+  let newContent = document.createElement("div");
+  newContent.setAttribute("id", "content" + number);
+
+  newHolder.appendChild(newDate);
+  newHolder.appendChild(newTemp);
+  newHolder.appendChild(newContent);
+
+  document.getElementsByClassName("holder entry")[0].appendChild(newHolder);
+
 }
 
 const getWeather = async () => {
