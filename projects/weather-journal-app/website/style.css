@@ -1,15 +1,15 @@
+
 body{
     background: #fffff8;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     margin: 0;
     height: 100%;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 #app{
     display: grid;
-    /* grid-auto-rows: minmax(150px, auto); */
-    height:100vh;
     background: #232D33;
     color: #f0d43a;
     justify-content: center;

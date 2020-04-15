@@ -7,6 +7,8 @@ function refreshElements() {
   while (groupHolder.childElementCount != 1) {
     groupHolder.removeChild(groupHolder.lastChild);
   }
+  document.getElementById("zip").innerHTML = '';
+  document.getElementById("feelings").innerHTML = '';
 }
 
 const updateUI = async () => {
@@ -16,7 +18,7 @@ const updateUI = async () => {
     const allData = await request.json();
     refreshElements();
 
-    allData.forEach((item, i) => {
+    allData.reverse().forEach((item, i) => {
       addSection(i);
       document.getElementById('date' + i).innerHTML = allData[i].date;
       document.getElementById('temp' + i).innerHTML = allData[i].temp;
