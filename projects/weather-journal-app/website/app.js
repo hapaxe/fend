@@ -2,11 +2,19 @@
 const weatherAPIKey = '30efb8f67a055073b5b8bbee329eac70';
 const weatherAPICall = 'https://api.openweathermap.org/data/2.5/weather?zip='
 
+function refreshElements() {
+  let groupHolder = document.getElementsByClassName("holder entry")[0];
+  while (groupHolder.childElementCount != 1) {
+    groupHolder.removeChild(groupHolder.lastChild);
+  }
+}
+
 const updateUI = async () => {
   const request = await fetch('http://localhost:3000/all');
   try{
 
     const allData = await request.json();
+    refreshElements();
 
     allData.forEach((item, i) => {
       addSection(i);
@@ -43,6 +51,7 @@ const getWeather = async () => {
   const res = await fetch(weatherAPICall + zipCode + ',us'+'&appid=' + weatherAPIKey);
   try {
     const data = await res.json();
+    console.log(data);
     let d = new Date();
     let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
     let temp = data['main']['temp'];
@@ -56,6 +65,10 @@ const getWeather = async () => {
 }
 
 const postData = async ( data ) => {
+    if (Object.keys(data).length === 0) {
+      // do not post anything if previous query failed and returned null object.
+      return;
+    }
     url = 'http://localhost:3000/post';
 
     const response = await fetch(url, {
@@ -78,10 +91,13 @@ const postData = async ( data ) => {
 function postFeelings(e) {
   getWeather()
   .then(function(data) {
-    postData(data);
+      postData(data);
    }
   )
-  .then(updateUI())
+  .then(function(res) {
+    updateUI();
+    }
+  )
 }
 
 document.getElementById('generate').addEventListener('click', postFeelings);
