@@ -21,7 +21,7 @@ const updateUI = async () => {
     allData.reverse().forEach((item, i) => {
       addSection(i);
       document.getElementById('date' + i).innerHTML = allData[i].date;
-      document.getElementById('temp' + i).innerHTML = allData[i].temp;
+      document.getElementById('temp' + i).innerHTML = Math.round(allData[i].temp) + ' degrees';
       document.getElementById('content' + i).innerHTML = allData[i].feelings;
     });
 
@@ -50,7 +50,7 @@ function addSection(number) {
 
 const getWeather = async () => {
   const zipCode = document.getElementById("zip").value;
-  const res = await fetch(weatherAPICall + zipCode + ',us'+'&appid=' + weatherAPIKey);
+  const res = await fetch(weatherAPICall + zipCode + ',us' + '&units=imperial' + '&appid=' + weatherAPIKey);
   try {
     const data = await res.json();
     console.log(data);
